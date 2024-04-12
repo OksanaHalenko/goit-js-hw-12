@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
@@ -15,9 +15,9 @@ const loader = document.querySelector(".loading-indicator");
 
 form.addEventListener("submit", handleSubmit);
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
-     gallery.innerHTML = "";
+    gallery.innerHTML = "";
     const dataSearch = event.currentTarget.elements.data.value.trim();
     if (dataSearch === "") {
             return iziToast.error({
@@ -25,30 +25,27 @@ function handleSubmit(event) {
              position: "topRight"
             });
     };
-     showLoading(loader);
-    createRequest(dataSearch)
-        .then(data => {
-            if (data.hits.length === 0) {
+    showLoading(loader);
+    try {
+        const data = await createRequest(dataSearch);
+        if (data.hits.length === 0) {
                 hideLoading(loader);
                 return iziToast.error({
                     message: "Sorry, there are no images matching your search query. Please try again!",
                  position: "topRight"
                 })
             }
-            form.reset();
-           
+            form.reset();           
             gallery.innerHTML = createGallery(data.hits);
             lightboxGallery.refresh();
-        })
-        .catch(error => {
-            iziToast.error({
-               message: `${error}`,
-            });
-        })
-        .finally(() => {
-           
-             hideLoading(loader);
-    })
+    } catch (error) {
+         iziToast.error({
+                message: "Sorry, there are no images matching your search query. Please try again!",
+                position: "topRight"
+                })
+    } finally {
+           hideLoading(loader);
+    }
 }
 
 let lightboxGallery = new SimpleLightbox('.gallery a', {
