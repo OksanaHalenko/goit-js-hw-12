@@ -7,9 +7,9 @@
     <title>Goit-js-hw-12</title>
     
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-8c59ed88.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-6e0bf343.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-1cd1f9d9.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-7e69c6d7.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-547104d5.css">
   </head>
   <body>
     <div class="container">
@@ -20,15 +20,21 @@
           name="data"
           placeholder="Search images..."
         />
-        <button class="search-btn" type="submit">Search</button>
+        <button class="search-btn" type="submit" name="searchBtn">
+          Search
+        </button>
       </form>
-    </div>
-    <div class="loading-indicator">
-      <span class="loader"></span>
     </div>
     <div class="container">
       <ul class="gallery"></ul>
     </div>
+
+    <button class="search-btn load-btn" type="button">Load more</button>
+
+    <div class="loading-indicator">
+      <span class="loader"></span>
+    </div>
+
     
   </body>
 </html>
