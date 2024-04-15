@@ -29,7 +29,6 @@
 .search-btn {
   border: none;
   border-radius: 8px;
-  padding: 8px 16px;
   width: 91px;
   height: 40px;
   background-color: #4e75ff;
@@ -39,6 +38,10 @@
 .search-btn:focus,
 .search-btn:hover {
   background-color: #6c8cff;
+}
+.load-btn {
+  display: none;
+  margin: 16px 50%;
 }
 .loading-indicator {
   display: none;
