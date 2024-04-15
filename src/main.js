@@ -67,16 +67,21 @@ async function leadMore(event) {
     try {
         const data = await createRequest(dataSearch, page);
         gallery.insertAdjacentHTML("beforeend", createGallery(data.hits));
+        lightboxGallery.refresh();
         const { height } = gallery.firstElementChild.getBoundingClientRect();
         window.scrollBy({
             top: height * 2,
             behavior: "smooth",
         });
-
-        if (page < allPages) {
-            showLoading(loadBtn);
+ showLoading(loadBtn);
+        if (page >= allPages) {
+           hideLoading(loadBtn);
+            return iziToast.show({
+                message: "We're sorry, but you've reached the end of search results.",
+                position: "topRight"
+            })
         }
-        lightboxGallery.refresh();
+        
         
     } catch (error) {
         iziToast.error({
